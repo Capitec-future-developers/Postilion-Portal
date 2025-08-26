@@ -1,9 +1,9 @@
-import { dateBase } from './Database.js'; // adjust path if needed
+import { dateBase } from './Database.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.getElementById('cards');
-    const subheader = document.getElementById('subheader');
+document.addEventListener("DOMContentLoaded", function () {
     const content = document.getElementById('content');
+    const subheader = document.getElementById('subheader');
+    const sideBar = document.querySelector(".side-bar");
 
     function setSubheader(text) {
         if (subheader) subheader.textContent = text;
@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showCustomerService() {
         setSubheader("Cards - Find a Card");
+
         if (content) {
             content.innerHTML = `
                 <section>
@@ -45,11 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
                         <button id="search">Search</button>
                         <button id="clear">Clear</button>
                     </div>
-                    <div id="search-result"></div>
+                    <div class="client-details">
+          <table id="client-table">
+            <thead>
+              <tr>
+                <th>Card Number</th>
+                <th>Card Sequence Number</th>
+                <th>Card Status</th>
+                <th>Expiry Date</th>
+                <th>Card Program</th>
+                 </tr>
+            </thead>
+            <tbody id="client-table-body"></tbody>
+          </table>
+        </div>
+                    
                 </section>
             `;
 
-            // Add functionality for Search button
             const searchBtn = document.getElementById('search');
             const clearBtn = document.getElementById('clear');
             const errorMessage = document.getElementById('error-message');
@@ -96,7 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (cards) {
-        cards.addEventListener('click', showCustomerService);
+    if (sideBar) {
+        sideBar.addEventListener('click', (e) => {
+            const clicked = e.target.closest('.side-bar-item');
+            if (!clicked) return;
+
+            if (clicked.id === 'cards') {
+                showCustomerService();
+            }
+        });
     }
 });
