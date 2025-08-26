@@ -14,6 +14,7 @@ export const dateBase = [
         card_since_day: "06",
         expiry_date: "12/2028",
         expiry_day: "31",
+        company_card: "<input type='checkbox' checked>",
         card_issued: "2024-06-06T01:45:08",
         card_activated: "2024-06-13T11:42:08",
         branch_code: "BR001",

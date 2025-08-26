@@ -88,3 +88,18 @@ align-content: center;
     display: none;
 }
 
+.top-stuff{
+    position: absolute;
+    top: 150px;
+    left: 260px;
+    width: 80%;
+    overflow: hidden;
+    height: 100px;
+    background-color: #fff;
+}
+
+.card-inquiry-table{
+    position: absolute;
+    top: 250px;
+    left: 260px;
+}
