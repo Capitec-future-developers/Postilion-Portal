@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    function showCustomerService() {
+    function showCards() {
         setSubheader("Cards - Find a Card");
 
         if (content) {
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!clicked) return;
 
             if (clicked.id === 'cards') {
-                showCustomerService();
+                showCards();
             }
         });
     }
