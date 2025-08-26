@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const sideBar = document.querySelector(".side-bar");
 
     const sideBarContent = `
-    <div class="head" style="width: 50px;"><img src="../img/head.png" alt="head" class="img"></div>
+    <div class="head" style="width: 50px;"><img src="./img/head.png" alt="head" class="img"></div>
     <div class="side-bar-content">
     <div class="side-bar-item">Account Products</div>
     <div class="side-bar-item">Accounts</div>
