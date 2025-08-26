@@ -64,3 +64,30 @@ align-content: center;
     gap: 10px;
     cursor: pointer;
 }
+.client-details{
+    position: relative;
+    top: 300px;
+    left: 260px;
+    border: 3px solid #8888;
+    width: 80%;
+    overflow: hidden;
+    height: 100px;
+    background-color: #fff;
+}
+
+
+#client-table thead {
+    background-color: lightblue;
+}
+#client-table th, #client-table td {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+#client-table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 100%;
+    display: none;
+}
+

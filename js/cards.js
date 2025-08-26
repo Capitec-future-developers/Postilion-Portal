@@ -47,27 +47,27 @@ document.addEventListener("DOMContentLoaded", function () {
                         <button id="clear">Clear</button>
                     </div>
                     <div class="client-details">
-          <table id="client-table">
-            <thead>
-              <tr>
-                <th>Card Number</th>
-                <th>Card Sequence Number</th>
-                <th>Card Status</th>
-                <th>Expiry Date</th>
-                <th>Card Program</th>
-                 </tr>
-            </thead>
-            <tbody id="client-table-body"></tbody>
-          </table>
-        </div>
-                    
+                        <table id="client-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>Card Number</th>
+                                    <th>Card Sequence Number</th>
+                                    <th>Card Status</th>
+                                    <th>Expiry Date</th>
+                                    <th>Card Program</th>
+                                </tr>
+                            </thead>
+                            <tbody id="client-table-body"></tbody>
+                        </table>
+                    </div>
                 </section>
             `;
 
             const searchBtn = document.getElementById('search');
             const clearBtn = document.getElementById('clear');
             const errorMessage = document.getElementById('error-message');
-            const resultContainer = document.getElementById('search-result');
+            const table = document.getElementById('client-table');
+            const tableBody = document.getElementById('client-table-body');
 
             searchBtn.addEventListener('click', () => {
                 const cardNumber = document.getElementById('cardNumber').value.trim();
@@ -82,19 +82,23 @@ document.addEventListener("DOMContentLoaded", function () {
                     (customerId && client.customer_id === customerId)
                 );
 
+                tableBody.innerHTML = ''; // clear old results
+
                 if (found) {
                     errorMessage.textContent = '';
-                    resultContainer.innerHTML = `
-                        <h4>Client Details</h4>
-                        <p><strong>Name:</strong> ${found.client_name} ${found.client_surname}</p>
-                        <p><strong>Company:</strong> ${found.company_name}</p>
-                        <p><strong>Card Number:</strong> ${found.card_number}</p>
-                        <p><strong>Customer ID:</strong> ${found.customer_id}</p>
-                        <p><strong>Address:</strong> ${found.address}</p>
-                        <p><strong>National ID:</strong> ${found.national_id}</p>
+                    table.style.display = 'table'; // show table
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${found.card_number}</td>
+                        <td>${found.card_sequence || 'N/A'}</td>
+                        <td>${found.card_status || 'N/A'}</td>
+                        <td>${found.expiry_date || 'N/A'}</td>
+                        <td>${found.card_program || 'N/A'}</td>
                     `;
+                    tableBody.appendChild(row);
                 } else {
-                    resultContainer.innerHTML = '';
+                    table.style.display = 'none'; // hide if not found
                     errorMessage.textContent = 'No client found with the given details.';
                 }
             });
@@ -104,7 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('firstName').value = '';
                 document.getElementById('lastName').value = '';
                 document.getElementById('customerId').value = '';
-                resultContainer.innerHTML = '';
+
+                tableBody.innerHTML = '';
+                table.style.display = 'none'; // hide table again
                 errorMessage.textContent = '';
             });
         }
