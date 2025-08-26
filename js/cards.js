@@ -4,10 +4,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const content = document.getElementById('content');
     const subheader = document.getElementById('subheader');
     const sideBar = document.querySelector(".side-bar");
+    const cardInquiry = document.getElementById('card-inquiry');
+
+
+
+    if (subheader) {
+        subheader.style.display = "none";
+    }
 
     function setSubheader(text) {
-        if (subheader) subheader.textContent = text;
+        if (subheader) {
+            subheader.textContent = text;
+            subheader.style.display = "block";
+        }
     }
+
+    // Show Card Inquiry top buttons
+    function showCardInquiry(cardNumber) {
+        setSubheader("Cards - Card Inquiry");
+
+        if (!content) return;
+
+        content.innerHTML = `
+            <div class="top-stuff">
+                <button id="edit">Edit</button>
+                <button id="active-deactivate">Active/Deactivate</button>
+                <button id="place-remove-hold">Place / Remove hold</button>
+                <p style="margin-top:10px;">Card Number: <strong>${cardNumber}</strong></p>
+            </div>
+        `;
+    }
+
 
     function showCustomerService() {
         setSubheader("Cards - Find a Card");
@@ -90,9 +117,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${found.card_number}</td>
-                        <td>${found.card_sequence || 'N/A'}</td>
-                        <td>${found.card_status || 'N/A'}</td>
+                        <td style="color: #1384bf; cursor: pointer;" id="card-inquiry">${found.card_number}</td>
+                        <td>${found.card_sequence_number || 'N/A'}</td>
+                        <td>
+                            ${found.card_status
+                        ? `<img src="${found.card_status}" alt="status" width="20">`
+                        : 'N/A'}
+                        </td>
                         <td>${found.expiry_date || 'N/A'}</td>
                         <td>${found.card_program || 'N/A'}</td>
                     `;
@@ -126,4 +157,5 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
 });

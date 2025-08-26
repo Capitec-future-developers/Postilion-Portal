@@ -64,18 +64,15 @@ align-content: center;
     gap: 10px;
     cursor: pointer;
 }
-.client-details{
+.client-details {
     position: relative;
     top: 300px;
     left: 260px;
-    border: 2px solid #8888;
     width: 80%;
     overflow: hidden;
     height: 200px;
     background-color: #fff;
 }
-
-
 #client-table thead {
     background-color: lightblue;
 }

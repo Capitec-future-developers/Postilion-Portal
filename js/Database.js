@@ -1,4 +1,4 @@
-// External database of clients
+
 export const dateBase = [
     {
         company_name: "Mzansi Tech",
@@ -8,7 +8,7 @@ export const dateBase = [
         card_program: "CapBusDV",
         card_sequence_number: "001",
         reporting_reference: "Restricted",
-        card_status: "Active",
+        card_status_word: "Active",
         hold_response_code: "None",
         card_since_date: "06/06/2024",
         card_since_day: "06",
@@ -26,7 +26,8 @@ export const dateBase = [
         name_on_card: "O Mohlala",
         address: "123 Main Street, Johannesburg",
         national_id: "ID1234567890",
-        date_of_birth: "1995-04-10"
+        date_of_birth: "1995-04-10",
+        card_status: "./img/active-card.png"
     },
     {
         company_name: "Soweto Logistics",
