@@ -37,7 +37,7 @@ export const dateBase = [
         card_program: "CapBusDV",
         card_sequence_number: "002",
         reporting_reference: "Restricted",
-        card_status: "Active",
+        card_status_word: "Active",
         hold_response_code: "None",
         card_since_date: "08/02/2024",
         card_since_day: "08",
@@ -55,7 +55,9 @@ export const dateBase = [
         name_on_card: "Z Dube",
         address: "45 Vilakazi Street, Soweto",
         national_id: "ID9876543210",
-        date_of_birth: "1992-07-15"
+        date_of_birth: "1992-07-15",
+        card_status: "./img/active-card.png"
+
     },
     {
         company_name: "CapeNet Solutions",
@@ -65,7 +67,7 @@ export const dateBase = [
         card_program: "CapBusDV",
         card_sequence_number: "003",
         reporting_reference: "Restricted",
-        card_status: "Active",
+        card_status_word: "Not active",
         hold_response_code: "None",
         card_since_date: "12/03/2024",
         card_since_day: "12",
@@ -83,7 +85,9 @@ export const dateBase = [
         name_on_card: "S Nong",
         address: "12 Loop Street, Cape Town",
         national_id: "ID4567891230",
-        date_of_birth: "1989-03-22"
+        date_of_birth: "1989-03-22",
+        card_status: "./img/notactive.png"
+
     },
     {
         company_name: "Durban Exports",
@@ -93,7 +97,7 @@ export const dateBase = [
         card_program: "CapBusDV",
         card_sequence_number: "004",
         reporting_reference: "Restricted",
-        card_status: "Active",
+        card_status_word: "Active",
         hold_response_code: "None",
         card_since_date: "03/05/2024",
         card_since_day: "03",
@@ -111,7 +115,9 @@ export const dateBase = [
         name_on_card: "D Johanson",
         address: "89 Marine Parade, Durban",
         national_id: "ID6543217890",
-        date_of_birth: "1985-01-09"
+        date_of_birth: "1985-01-09",
+        card_status: "./img/active-card.png"
+
     },
     {
         company_name: "Pretoria Finance",
@@ -121,7 +127,7 @@ export const dateBase = [
         card_program: "CapBusDV",
         card_sequence_number: "005",
         reporting_reference: "Restricted",
-        card_status: "Active",
+        card_status_word: "Active",
         hold_response_code: "None",
         card_since_date: "10/07/2024",
         card_since_day: "10",
@@ -139,7 +145,9 @@ export const dateBase = [
         name_on_card: "P Mndaweni",
         address: "77 Church Street, Pretoria",
         national_id: "ID3216549870",
-        date_of_birth: "1990-10-30"
+        date_of_birth: "1990-10-30",
+        card_status: "./img/active-card.png"
+
     }
 ];
 
