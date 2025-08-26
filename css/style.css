@@ -58,7 +58,7 @@
     left: 230px;
     height: 120px;
     width: 84%;
-   overflow: hidden;
+
 }
 
 
@@ -104,4 +104,14 @@
 
 .bottom-items-right span:hover {
     text-decoration: underline;
+}
+
+.sub-header {
+    position: absolute;
+    top: 130px;
+    left: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #3c3b3b;
+    width: 98%;
 }

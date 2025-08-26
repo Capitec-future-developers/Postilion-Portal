@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const headerContent = `
     <div class="header-content">
+    <div class="sub-header">Financial Institution Home</div>
                 <div class="header-item">
                     <div class="items">
                         <span>User:</span>
@@ -35,7 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span>HowTo|</span>
                     <span>About</span>
                 </div>
-            </div>`;
+            </div>
+
+`;
 
     if (header) {
         header.innerHTML = headerContent;
