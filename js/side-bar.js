@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     items.forEach(item => {
         item.addEventListener("click", function () {
-            // Get the ID of the clicked item
+
             const id = this.id;
 
 
