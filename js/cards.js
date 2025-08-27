@@ -83,8 +83,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 </table>
             </div>
 
+<!-- Linked Accounts Tab -->
+            <div id="tab-2-content" class="tab-content">
+            <div>Account Linked to Card</div>
+                <table class="linked-accounts-table">
+                    <thead>
+                        <tr>
+                            <th>Unlink</th>
+                            <th>Account Number</th>
+                            <th>Account type</th>
+                            <th>Nominated Account type</th>
+                            <th>Account Product</th>
+                            <th>Advanced Limits</th>
+                            <th>Currency</th>
+                            <th>Default Account Type</th>
+                            <th>Qualifer</th>
+                            <th>Account Nickname</th>
+                        </tr>
+                    </thead>
+                    <tbody id="linked-accounts-table"></tbody>
+                </table>
+            </div>
+
             <!-- Transactions Tab -->
             <div id="tab-3-content" class="tab-content">
+            
                 <table class="transactions-table">
                     <thead>
                         <tr>
@@ -105,12 +128,32 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         `;
 
-        // Populate Customers Table
-        const tableBody = document.getElementById('customers-table-body');
+        const tableBody = document.getElementById('linked-accounts-table');
+        const unlinkBtn = document.getElementById('unlink');
         tableBody.innerHTML = "";
         if (card) {
             const row = document.createElement('tr');
-            row.innerHTML = `
+            row.innerHTML =`
+            <td></td>
+            <td>${card.account_number}</td>
+            <td>${card.account_type}</td>
+            <td>${card.account_type}</td>
+            <td>${card.bank}</td>
+            <td>View Advanced Limits</td>
+            <td>Rand</td>
+            <td>Default</td>
+            <td>${card.type}</td>
+            <td></td>
+            
+            `;
+            tableBody.appendChild(row);
+        }
+
+        const tableBody2 = document.getElementById('customers-table-body');
+        tableBody2.innerHTML = "";
+        if (card) {
+            const row2 = document.createElement('tr');
+            row2.innerHTML = `
                 <td>${card.type || 'N/A'}</td>
                 <td>${card.customer_id || 'N/A'}</td>
                 <td>${card.client_name || 'N/A'} ${card.client_surname || ''}</td>
@@ -119,10 +162,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${card.national_id || 'N/A'}</td>
                 <td>${card.date_of_birth || 'N/A'}</td>
             `;
-            tableBody.appendChild(row);
+            tableBody2.appendChild(row2);
         }
 
-        // Tabs Functionality
+
         const tabs = document.querySelectorAll('.tab-item');
         const tabContents = document.querySelectorAll('.tab-content');
 
@@ -138,7 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 target.style.display = 'block';
 
-                // Populate transactions dynamically only when tab is clicked
+
                 if (tab.dataset.target === 'tab-3-content') {
                     const transactionsTableBody = document.getElementById('transactions-table-body');
                     transactionsTableBody.innerHTML = '';
