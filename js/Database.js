@@ -1,3 +1,80 @@
+export const transactionDatabase = [
+    // Omphile Mohlala
+    ...Array.from({ length: 10 }).map((_, i) => ({
+        tranNumber: `6089446682${7 + i}`,
+        realtimeDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        terminalDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        messageType: "0200",
+        tranType: i % 2 === 0 ? "00" : "37",
+        amount: `ZAR ${Math.floor(Math.random() * 10000 + 100).toLocaleString()}.00`,
+        responseCode: "00",
+        cardNumber: "4016000011163734",
+        customerId: "154529078",
+        fromAccount: "105***4059",
+        toAccount: `205***${1000 + i}`
+    })),
+
+    // Zenzi Dube
+    ...Array.from({ length: 10 }).map((_, i) => ({
+        tranNumber: `4685244703${5 + i}`,
+        realtimeDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        terminalDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        messageType: "0200",
+        tranType: i % 2 === 0 ? "00" : "37",
+        amount: `ZAR ${Math.floor(Math.random() * 20000 + 200).toLocaleString()}.00`,
+        responseCode: "00",
+        cardNumber: "4016000023456789",
+        customerId: "171788097",
+        fromAccount: "105***4059",
+        toAccount: `205***${2000 + i}`
+    })),
+
+    // Spencer Nong
+    ...Array.from({ length: 10 }).map((_, i) => ({
+        tranNumber: `6089446600${8 + i}`,
+        realtimeDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        terminalDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        messageType: "0200",
+        tranType: i % 2 === 0 ? "00" : "37",
+        amount: `ZAR ${Math.floor(Math.random() * 15000 + 150).toLocaleString()}.00`,
+        responseCode: i === 0 ? "63" : "00",
+        cardNumber: "4016000034567890",
+        customerId: "17889063",
+        fromAccount: "105***4059",
+        toAccount: `205***${3000 + i}`
+    })),
+
+    // Dwain Johanson
+    ...Array.from({ length: 10 }).map((_, i) => ({
+        tranNumber: `6089446700${i + 1}`,
+        realtimeDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        terminalDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        messageType: "0200",
+        tranType: i % 2 === 0 ? "00" : "37",
+        amount: `ZAR ${Math.floor(Math.random() * 25000 + 500).toLocaleString()}.00`,
+        responseCode: "00",
+        cardNumber: "4016000045678901",
+        customerId: "10087911",
+        fromAccount: "105***4059",
+        toAccount: `205***${4000 + i}`
+    })),
+
+    // Phindile Mndaweni
+    ...Array.from({ length: 10 }).map((_, i) => ({
+        tranNumber: `6089446710${i + 1}`,
+        realtimeDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        terminalDateTime: `2025-08-${27 - i}T${Math.floor(Math.random() * 24).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}:${Math.floor(Math.random() * 60).toString().padStart(2,'0')}`,
+        messageType: "0200",
+        tranType: i % 2 === 0 ? "00" : "37",
+        amount: `ZAR ${Math.floor(Math.random() * 30000 + 800).toLocaleString()}.00`,
+        responseCode: "00",
+        cardNumber: "4016000056789012",
+        customerId: "18252005",
+        fromAccount: "105***4059",
+        toAccount: `205***${5000 + i}`
+    }))
+];
+
 
 export const dateBase = [
     {
@@ -14,7 +91,7 @@ export const dateBase = [
         card_since_day: "06",
         expiry_date: "12/2028",
         expiry_day: "31",
-        company_card: "<input type='checkbox' checked>",
+        company_card: "<input type='checkbox' checked style='left: -200px; padding-top: 10px; position: absolute;'>",
         card_issued: "2024-06-06T01:45:08",
         card_activated: "2024-06-13T11:42:08",
         branch_code: "BR001",
@@ -22,8 +99,8 @@ export const dateBase = [
         vip_card: false,
         last_updated_date: "2025-06-21T10:31:31",
         vip_lapse_date: null,
-        type: "Corporate",
-        customer_id: "CUST001",
+        type: "Primary",
+        customer_id: "154529078",
         name_on_card: "O Mohlala",
         address: "123 Main Street, Johannesburg",
         national_id: "ID1234567890",
@@ -51,8 +128,8 @@ export const dateBase = [
         vip_card: true,
         last_updated_date: "2025-07-10T16:45:00",
         vip_lapse_date: "2026-07-10",
-        type: "Corporate",
-        customer_id: "CUST002",
+        type: "Primary",
+        customer_id: "171788097",
         name_on_card: "Z Dube",
         address: "45 Vilakazi Street, Soweto",
         national_id: "ID9876543210",
@@ -81,8 +158,8 @@ export const dateBase = [
         vip_card: false,
         last_updated_date: "2025-07-15T18:20:00",
         vip_lapse_date: null,
-        type: "Corporate",
-        customer_id: "CUST003",
+        type: "Primary",
+        customer_id: "17889063",
         name_on_card: "S Nong",
         address: "12 Loop Street, Cape Town",
         national_id: "ID4567891230",
@@ -111,8 +188,8 @@ export const dateBase = [
         vip_card: true,
         last_updated_date: "2025-08-01T10:10:00",
         vip_lapse_date: "2026-08-01",
-        type: "Corporate",
-        customer_id: "CUST004",
+        type: "Primary",
+        customer_id: "10087911",
         name_on_card: "D Johanson",
         address: "89 Marine Parade, Durban",
         national_id: "ID6543217890",
@@ -141,8 +218,8 @@ export const dateBase = [
         vip_card: false,
         last_updated_date: "2025-07-25T11:05:00",
         vip_lapse_date: null,
-        type: "Corporate",
-        customer_id: "CUST005",
+        type: "Primary",
+        customer_id: "18252005",
         name_on_card: "P Mndaweni",
         address: "77 Church Street, Pretoria",
         national_id: "ID3216549870",

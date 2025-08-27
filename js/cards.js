@@ -1,14 +1,12 @@
-import { dateBase } from './Database.js';
+import { dateBase, transactionDatabase } from './Database.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const content = document.getElementById('content');
     const subheader = document.getElementById('subheader');
     const sideBar = document.querySelector(".side-bar");
 
-    // Initially hide subheader
     if (subheader) subheader.style.display = "none";
 
-    // Helper to show subheader
     function setSubheader(text) {
         if (subheader) {
             subheader.textContent = text;
@@ -16,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Show Card Inquiry table
     function showCardInquiry(card) {
         setSubheader("Cards - Card Inquiry");
 
@@ -28,21 +25,151 @@ document.addEventListener("DOMContentLoaded", function () {
                 <button id="active-deactivate">Active/Deactivate</button>
                 <button id="place-remove-hold">Place / Remove hold</button>
             </div>
-            <div class="card-inquiry">
-                <table class="card-inquiry-table">
-                    <tr><td>Card Number:</td><td>${card.card_number}</td></tr>
-                    <tr><td>Card Sequence:</td><td>${card.card_sequence_number || 'N/A'}</td></tr>
-                    <tr><td>Company Card:</td><td>${card.company_card || 'N/A'}</td></tr>
-                    <tr><td>Card Status:</td><td>${card.card_status_word || 'N/A'}</td></tr>
-                    <tr><td>Card Since Date:</td><td>${card.card_since_date || 'N/A'}</td></tr>
-                    <tr><td>Card Since Day:</td><td>${card.card_since_day || 'N/A'}</td></tr>
-                    <tr><td>Card Issued:</td><td>${card.card_issued || 'N/A'}</td></tr>
+
+            <div class="card-inquiry-container">
+                <div class="card-inquiry-table-left">
+                    <div class="row"><span class="title-cell">Card Number:</span><span class="content-cell">${card.card_number}</span></div>
+                    <div class="row"><span class="title-cell">Card Sequence:</span><span class="content-cell">${card.card_sequence_number || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Company Card:</span><span class="content-cell">${card.company_card || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Card Status:</span><span class="content-cell">${card.card_status_word || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Card Since Date:</span><span class="content-cell">${card.card_since_date || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Card Since Day:</span><span class="content-cell">${card.card_since_day || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Card Issued:</span><span class="content-cell">${card.card_issued || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Branch Code:</span><span class="content-cell">${card.branch_code || ''}</span></div>
+                    <div class="row"><span class="title-cell">VIP Card:</span><span class="content-cell">${card.vip_card || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">VIP Lapse Date:</span><span class="content-cell">${card.vip_lapse_date || 'N/A'}</span></div>
+                </div>
+
+                <div class="card-inquiry-table-right">
+                    <div class="row"><span class="title-cell">Card Program:</span><span class="content-cell">${card.card_program || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Reporting Reference:</span><span class="content-cell">${card.reporting_reference || 'No permission'}</span></div>
+                    <div class="row"><span class="title-cell">Company Name:</span><span class="content-cell">${card.company_name || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Hold Response Code:</span><span class="content-cell">${card.hold_response_code || 'None'}</span></div>
+                    <div class="row"><span class="title-cell">Expiry Date:</span><span class="content-cell">${card.expiry_date || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Expiry Day:</span><span class="content-cell">${card.expiry_day || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Card Activated:</span><span class="content-cell">${card.card_activated || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Last Updated User:</span><span class="content-cell">${card.last_updated_user || 'N/A'}</span></div>
+                    <div class="row"><span class="title-cell">Last Updated Date:</span><span class="content-cell">${card.last_updated_date || 'N/A'}</span></div>
+                </div>
+            </div>
+
+            <div class="card-inquiry-tab">
+                <div class="tab-item tabact" data-target="tab-1-content">Customers</div>
+                <div class="tab-item" data-target="tab-2-content">Linked Accounts</div>
+                <div class="tab-item" data-target="tab-3-content">Transactions</div>
+                <div class="tab-item" data-target="tab-4-content">Security</div>
+                <div class="tab-item" data-target="tab-5-content">Additional Cards</div>
+                <div class="tab-item" data-target="tab-6-content">Limits</div>
+                <div class="tab-item" data-target="tab-7-content">Extended Fields</div>
+                <div class="tab-item" data-target="tab-8-content">Records Updates</div>
+            </div>
+
+            <!-- Customers Tab -->
+            <div id="tab-1-content" class="tab-content" style="display: block;">
+                <button class="unlink" id="unlink">Unlink Customer</button>
+                <table class="customers-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Customer ID</th>
+                            <th>Name</th>
+                            <th>Name on Card</th>
+                            <th>Address</th>
+                            <th>National ID / SSN</th>
+                            <th>Date Of Birth</th>
+                        </tr>
+                    </thead>
+                    <tbody id="customers-table-body"></tbody>
+                </table>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div id="tab-3-content" class="tab-content">
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Tran#</th>
+                            <th>Realtime Date/Time</th>
+                            <th>Terminal Date/Time</th>
+                            <th>Message Type</th>
+                            <th>Tran Type</th>
+                            <th>Amount</th>
+                            <th>Response Code</th>
+                            <th>Card Number</th>
+                            <th>From Account</th>
+                            <th>To Account</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-table-body"></tbody>
                 </table>
             </div>
         `;
+
+        // Populate Customers Table
+        const tableBody = document.getElementById('customers-table-body');
+        tableBody.innerHTML = "";
+        if (card) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${card.type || 'N/A'}</td>
+                <td>${card.customer_id || 'N/A'}</td>
+                <td>${card.client_name || 'N/A'} ${card.client_surname || ''}</td>
+                <td>${card.name_on_card || 'N/A'}</td>
+                <td>${card.address || 'N/A'}</td>
+                <td>${card.national_id || 'N/A'}</td>
+                <td>${card.date_of_birth || 'N/A'}</td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        // Tabs Functionality
+        const tabs = document.querySelectorAll('.tab-item');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('tabact'));
+                tab.classList.add('tabact');
+
+                tabContents.forEach(c => c.style.display = 'none');
+
+                const target = document.getElementById(tab.dataset.target);
+                if (!target) return;
+
+                target.style.display = 'block';
+
+                // Populate transactions dynamically only when tab is clicked
+                if (tab.dataset.target === 'tab-3-content') {
+                    const transactionsTableBody = document.getElementById('transactions-table-body');
+                    transactionsTableBody.innerHTML = '';
+                    const transactions = transactionDatabase.filter(t => t.customerId === card.customer_id);
+                    if (transactions.length > 0) {
+                        transactions.forEach(t => {
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+                                <td>${t.tranNumber}</td>
+                                <td>${t.realtimeDateTime}</td>
+                                <td>${t.terminalDateTime}</td>
+                                <td>${t.messageType}</td>
+                                <td>${t.tranType}</td>
+                                <td>${t.amount}</td>
+                                <td>${t.responseCode}</td>
+                                <td>${t.cardNumber}</td>
+                                <td>${t.fromAccount}</td>
+                                <td>${t.toAccount}</td>
+                            `;
+                            transactionsTableBody.appendChild(tr);
+                        });
+                    } else {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `<td colspan="10" style="text-align:center;">No transactions found for this card</td>`;
+                        transactionsTableBody.appendChild(tr);
+                    }
+                }
+            });
+        });
     }
 
-    // Show Cards search table
     function showCards() {
         setSubheader("Cards - Find a Card");
 
