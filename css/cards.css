@@ -248,3 +248,10 @@ align-content: center;
 .customers-table td {
     font-size: 14px;
 }
+
+
+.edit-buttons{
+    position: absolute;
+    top: 600px;
+    right: 40px;
+}
