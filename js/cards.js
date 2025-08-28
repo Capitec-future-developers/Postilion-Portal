@@ -465,7 +465,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 errorMessage.textContent = 'No client found with the given details.';
             }
         });
-
+//yeah
         clearBtn.addEventListener('click', () => {
             document.getElementById('cardNumber').value = '';
             document.getElementById('firstName').value = '';
