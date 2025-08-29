@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Configuration
+// Configuration
     const AUTOMATION_STEP_DELAY = 2000; // 2 seconds between steps
     const BUBBLE_DISPLAY_TIME = 12000;
+    const EDIT_PASSWORD = "Genesis@2025!!"; // Password for editing use cases
 
-    // Navigation options based on app features
-    const navigationOptions = [
+// Navigation options based on app features
+    let navigationOptions = [
         {
             name: "Cards Navigation",
             steps: [
@@ -32,6 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
         }
     ];
+
+// Load saved options if available
+    const savedOptions = localStorage.getItem('userNavOptions');
+    if (savedOptions) {
+        navigationOptions = JSON.parse(savedOptions);
+    }
 
     const frequentOptions = ["Cards Navigation", "Customers Navigation", "Transactions Navigation"];
     let bubbles = [];
@@ -150,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navContainer.style.zIndex = "9999";
     navContainer.style.cursor = "move";
 
-    // Make container draggable
+// Make container draggable
     navContainer.addEventListener('mousedown', startDrag);
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', stopDrag);
@@ -210,11 +217,30 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdown.style.overflow = "hidden";
     dropdown.style.zIndex = "10000";
 
-    // Add options to dropdown as a table
+// Add options to dropdown as a table
     const table = document.createElement("table");
     table.style.width = "100%";
     table.style.borderCollapse = "collapse";
 
+// Add Edit Use Cases option
+    const editRow = document.createElement("tr");
+    const editCell = document.createElement("td");
+    editCell.textContent = "Edit Use Cases (Admin)";
+    editCell.style.padding = "12px 15px";
+    editCell.style.cursor = "pointer";
+    editCell.style.borderBottom = "1px solid #eee";
+    editCell.style.fontWeight = "bold";
+    editCell.style.color = "#d32f2f";
+    editCell.addEventListener("mouseenter", () => editCell.style.background = "#ffebee");
+    editCell.addEventListener("mouseleave", () => editCell.style.background = "white");
+    editCell.addEventListener("click", () => {
+        dropdown.style.display = "none";
+        showPasswordDialog();
+    });
+    editRow.appendChild(editCell);
+    table.appendChild(editRow);
+
+// Add navigation options
     navigationOptions.forEach(opt => {
         const row = document.createElement("tr");
         const cell = document.createElement("td");
@@ -239,6 +265,306 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
         hideBubbles();
     });
+
+    /* ------------ PASSWORD DIALOG ------------ */
+    function showPasswordDialog() {
+        const dialog = document.createElement("div");
+        dialog.style.position = "fixed";
+        dialog.style.top = "50%";
+        dialog.style.left = "50%";
+        dialog.style.transform = "translate(-50%, -50%)";
+        dialog.style.background = "white";
+        dialog.style.padding = "20px";
+        dialog.style.borderRadius = "10px";
+        dialog.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+        dialog.style.zIndex = "10001";
+        dialog.style.minWidth = "300px";
+
+        const title = document.createElement("h3");
+        title.textContent = "Admin Access Required";
+        title.style.margin = "0 0 15px 0";
+        title.style.color = "#092365";
+
+        const instruction = document.createElement("p");
+        instruction.textContent = "Please enter the admin password to edit use cases:";
+        instruction.style.margin = "0 0 10px 0";
+        instruction.style.fontSize = "14px";
+
+        const passwordInput = document.createElement("input");
+        passwordInput.type = "password";
+        passwordInput.style.width = "100%";
+        passwordInput.style.padding = "10px";
+        passwordInput.style.margin = "0 0 15px 0";
+        passwordInput.style.border = "1px solid #ccc";
+        passwordInput.style.borderRadius = "4px";
+        passwordInput.style.boxSizing = "border-box";
+
+        const buttonContainer = document.createElement("div");
+        buttonContainer.style.display = "flex";
+        buttonContainer.style.justifyContent = "flex-end";
+        buttonContainer.style.gap = "10px";
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.style.padding = "8px 15px";
+        cancelBtn.style.border = "1px solid #ccc";
+        cancelBtn.style.borderRadius = "4px";
+        cancelBtn.style.background = "white";
+        cancelBtn.style.cursor = "pointer";
+        cancelBtn.addEventListener("click", () => document.body.removeChild(dialog));
+
+        const submitBtn = document.createElement("button");
+        submitBtn.textContent = "Submit";
+        submitBtn.style.padding = "8px 15px";
+        submitBtn.style.border = "none";
+        submitBtn.style.borderRadius = "4px";
+        submitBtn.style.background = "#092365";
+        submitBtn.style.color = "white";
+        submitBtn.style.cursor = "pointer";
+        submitBtn.addEventListener("click", () => {
+            if (passwordInput.value === EDIT_PASSWORD) {
+                document.body.removeChild(dialog);
+                showEditUseCasesDialog();
+            } else {
+                alert("Incorrect password. Please try again.");
+                passwordInput.value = "";
+            }
+        });
+
+        buttonContainer.appendChild(cancelBtn);
+        buttonContainer.appendChild(submitBtn);
+
+        dialog.appendChild(title);
+        dialog.appendChild(instruction);
+        dialog.appendChild(passwordInput);
+        dialog.appendChild(buttonContainer);
+
+// Allow submitting with Enter key
+        passwordInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                submitBtn.click();
+            }
+        });
+
+        document.body.appendChild(dialog);
+        passwordInput.focus();
+    }
+
+    /* ------------ EDIT USE CASES DIALOG ------------ */
+    function showEditUseCasesDialog() {
+        const dialog = document.createElement("div");
+        dialog.style.position = "fixed";
+        dialog.style.top = "50%";
+        dialog.style.left = "50%";
+        dialog.style.transform = "translate(-50%, -50%)";
+        dialog.style.background = "white";
+        dialog.style.padding = "20px";
+        dialog.style.borderRadius = "10px";
+        dialog.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+        dialog.style.zIndex = "10001";
+        dialog.style.minWidth = "500px";
+        dialog.style.maxWidth = "90%";
+        dialog.style.maxHeight = "80vh";
+        dialog.style.overflowY = "auto";
+
+        const title = document.createElement("h3");
+        title.textContent = "Edit Navigation Use Cases";
+        title.style.margin = "0 0 15px 0";
+        title.style.color = "#092365";
+
+        const instructions = document.createElement("p");
+        instructions.textContent = "Edit the steps for each use case. Each step should be on a new line.";
+        instructions.style.margin = "0 0 15px 0";
+        instructions.style.fontSize = "14px";
+
+        const useCasesContainer = document.createElement("div");
+        useCasesContainer.style.marginBottom = "20px";
+
+// Create editors for each use case
+        navigationOptions.forEach((option, index) => {
+            createUseCaseEditor(useCasesContainer, option, index);
+        });
+
+// Add New Use Case button
+        const addButtonContainer = document.createElement("div");
+        addButtonContainer.style.marginBottom = "20px";
+        addButtonContainer.style.textAlign = "center";
+
+        const addButton = document.createElement("button");
+        addButton.textContent = "+ Add New Use Case";
+        addButton.style.padding = "10px 15px";
+        addButton.style.border = "1px dashed #092365";
+        addButton.style.borderRadius = "4px";
+        addButton.style.background = "transparent";
+        addButton.style.color = "#092365";
+        addButton.style.cursor = "pointer";
+        addButton.style.fontSize = "14px";
+        addButton.style.width = "100%";
+        addButton.addEventListener("mouseenter", () => {
+            addButton.style.background = "#f0f4ff";
+        });
+        addButton.addEventListener("mouseleave", () => {
+            addButton.style.background = "transparent";
+        });
+        addButton.addEventListener("click", () => {
+            const newUseCase = {
+                name: "New Use Case",
+                steps: ["Step 1", "Step 2", "Step 3"]
+            };
+            createUseCaseEditor(useCasesContainer, newUseCase, navigationOptions.length);
+            navigationOptions.push(newUseCase);
+        });
+
+        addButtonContainer.appendChild(addButton);
+        useCasesContainer.appendChild(addButtonContainer);
+
+        const buttonContainer = document.createElement("div");
+        buttonContainer.style.display = "flex";
+        buttonContainer.style.justifyContent = "flex-end";
+        buttonContainer.style.gap = "10px";
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.style.padding = "8px 15px";
+        cancelBtn.style.border = "1px solid #ccc";
+        cancelBtn.style.borderRadius = "4px";
+        cancelBtn.style.background = "white";
+        cancelBtn.style.cursor = "pointer";
+        cancelBtn.addEventListener("click", () => document.body.removeChild(dialog));
+
+        const saveBtn = document.createElement("button");
+        saveBtn.textContent = "Save Changes";
+        saveBtn.style.padding = "8px 15px";
+        saveBtn.style.border = "none";
+        saveBtn.style.borderRadius = "4px";
+        saveBtn.style.background = "#4caf50";
+        saveBtn.style.color = "white";
+        saveBtn.style.cursor = "pointer";
+        saveBtn.addEventListener("click", () => {
+// Collect all use case data
+            const useCaseEditors = useCasesContainer.querySelectorAll('.use-case-editor');
+            const updatedOptions = [];
+
+            useCaseEditors.forEach(editor => {
+                const nameInput = editor.querySelector('input[type="text"]');
+                const stepsTextarea = editor.querySelector('textarea');
+
+// Parse steps from textarea (one per line)
+                const steps = stepsTextarea.value.split('\n')
+                    .map(step => step.trim())
+                    .filter(step => step.length > 0);
+
+                updatedOptions.push({
+                    name: nameInput.value,
+                    steps: steps
+                });
+            });
+
+// Update navigation options
+            navigationOptions = updatedOptions;
+
+// Save to localStorage
+            localStorage.setItem('userNavOptions', JSON.stringify(navigationOptions));
+
+            document.body.removeChild(dialog);
+
+// Show confirmation
+            alert("Use cases updated successfully!");
+        });
+
+        buttonContainer.appendChild(cancelBtn);
+        buttonContainer.appendChild(saveBtn);
+
+        dialog.appendChild(title);
+        dialog.appendChild(instructions);
+        dialog.appendChild(useCasesContainer);
+        dialog.appendChild(buttonContainer);
+
+        document.body.appendChild(dialog);
+    }
+
+// Helper function to create a use case editor
+    function createUseCaseEditor(container, option, index) {
+        const useCaseDiv = document.createElement("div");
+        useCaseDiv.className = "use-case-editor";
+        useCaseDiv.style.marginBottom = "20px";
+        useCaseDiv.style.padding = "15px";
+        useCaseDiv.style.border = "1px solid #e0e0e0";
+        useCaseDiv.style.borderRadius = "8px";
+        useCaseDiv.style.backgroundColor = "#f9f9f9";
+
+// Header with title and delete button
+        const headerDiv = document.createElement("div");
+        headerDiv.style.display = "flex";
+        headerDiv.style.justifyContent = "space-between";
+        headerDiv.style.alignItems = "center";
+        headerDiv.style.marginBottom = "10px";
+
+        const nameLabel = document.createElement("label");
+        nameLabel.textContent = "Use Case Name:";
+        nameLabel.style.fontWeight = "bold";
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "× Delete";
+        deleteButton.style.padding = "4px 8px";
+        deleteButton.style.border = "1px solid #f44336";
+        deleteButton.style.borderRadius = "4px";
+        deleteButton.style.background = "transparent";
+        deleteButton.style.color = "#f44336";
+        deleteButton.style.cursor = "pointer";
+        deleteButton.style.fontSize = "12px";
+        deleteButton.addEventListener("mouseenter", () => {
+            deleteButton.style.background = "#ffebee";
+        });
+        deleteButton.addEventListener("mouseleave", () => {
+            deleteButton.style.background = "transparent";
+        });
+        deleteButton.addEventListener("click", () => {
+            if (navigationOptions.length > 1) {
+                if (confirm("Are you sure you want to delete this use case?")) {
+                    container.removeChild(useCaseDiv);
+                    navigationOptions.splice(index, 1);
+                }
+            } else {
+                alert("You need to have at least one use case.");
+            }
+        });
+
+        headerDiv.appendChild(nameLabel);
+        headerDiv.appendChild(deleteButton);
+
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.value = option.name;
+        nameInput.style.width = "100%";
+        nameInput.style.padding = "8px";
+        nameInput.style.marginBottom = "10px";
+        nameInput.style.border = "1px solid #ccc";
+        nameInput.style.borderRadius = "4px";
+        nameInput.style.boxSizing = "border-box";
+
+        const stepsLabel = document.createElement("label");
+        stepsLabel.textContent = "Steps (one per line):";
+        stepsLabel.style.display = "block";
+        stepsLabel.style.marginBottom = "5px";
+        stepsLabel.style.fontWeight = "bold";
+
+        const stepsTextarea = document.createElement("textarea");
+        stepsTextarea.value = option.steps.join('\n');
+        stepsTextarea.style.width = "100%";
+        stepsTextarea.style.height = "120px";
+        stepsTextarea.style.padding = "8px";
+        stepsTextarea.style.border = "1px solid #ccc";
+        stepsTextarea.style.borderRadius = "4px";
+        stepsTextarea.style.boxSizing = "border-box";
+        stepsTextarea.style.resize = "vertical";
+
+        useCaseDiv.appendChild(headerDiv);
+        useCaseDiv.appendChild(nameInput);
+        useCaseDiv.appendChild(stepsLabel);
+        useCaseDiv.appendChild(stepsTextarea);
+        container.appendChild(useCaseDiv);
+    }
 
     /* ------------ FREQUENT OPTIONS AS SPEECH BUBBLES ------------ */
     frequentOptions.forEach((freq, i) => {
@@ -309,17 +635,17 @@ document.addEventListener("DOMContentLoaded", () => {
         highlight.style.width = (rect.width + 10) + "px";
         highlight.style.height = (rect.height + 10) + "px";
         document.body.appendChild(highlight);
-        // Add pulse animation
+// Add pulse animation
         if (!document.getElementById("nav-pulse-style")) {
             const style = document.createElement("style");
             style.id = "nav-pulse-style";
             style.textContent = `
-                @keyframes pulse {
-                    0% { opacity: 1; transform: scale(1); }
-                    50% { opacity: 0.7; transform: scale(1.05); }
-                    100% { opacity: 1; transform: scale(1); }
-                }
-            `;
+@keyframes pulse {
+0% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.7; transform: scale(1.05); }
+100% { opacity: 1; transform: scale(1); }
+}
+`;
             document.head.appendChild(style);
         }
         element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -446,7 +772,7 @@ document.addEventListener("DOMContentLoaded", () => {
             highlightCurrentStep(option.name, stepIndex);
         }
         function highlightCurrentStep(optionName, step) {
-            const selector = highlightSelectors[optionName][step];
+            const selector = highlightSelectors[optionName] && highlightSelectors[optionName][step];
             if (selector) {
                 highlightElement(selector, option.steps[step]);
             }
@@ -549,7 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.addEventListener('mousemove', dragPanel);
         document.addEventListener('mouseup', stopDragPanel);
     }
-    // Clean up highlights when page changes
+// Clean up highlights when page changes
     const observer = new MutationObserver(() => {
         if (currentAutomation) {
             setTimeout(() => {
