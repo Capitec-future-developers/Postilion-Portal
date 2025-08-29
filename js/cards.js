@@ -133,7 +133,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
  <!-- Other Tabs (initially hidden) -->
  <div id="tab-4-content" class="tab-content" style="display: none;">
- <p>Security content goes here</p>
+ <button id="edit">Edit</button>
+ <p>PIN Verification</p>
+ 
  </div>
  <div id="tab-5-content" class="tab-content" style="display: none;">
  <p>Additional Cards content goes here</p>
