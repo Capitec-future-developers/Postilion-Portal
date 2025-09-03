@@ -395,6 +395,10 @@ document.addEventListener("DOMContentLoaded", function () {
  <label for="accountNumber">Account Number:</label>
  <input type="text" id="accountNumber" class="card-number">
  </div>
+ <div class="field">
+ <label for="Empty-box"></label>
+ <input type="text" >
+</div>
  </div>
  </div>
  <div class="buttons">
