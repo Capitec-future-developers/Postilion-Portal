@@ -25,11 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.card_status || 'N/A');
 
         content.innerHTML = `
- <div class="top-stuff">
- <button id="edit">Edit</button>
- <button id="active-deactivate">${card.card_status_word === 'Active' ? 'Deactivate' : 'Activate'}</button>
- <button id="place-remove-hold">Place / Remove hold</button>
- </div>
+ 
 
  <div class="card-inquiry-container">
  <div class="card-inquiry-table-left">
@@ -155,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
  
  <div id="tab-5-contents" class="tab-content" style="display: none;">
  <p>Additional Cards content goes here</p>
+ <span></span>
  </div>
  `;
 
