@@ -46,9 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // only grab after rendering
     const subheader = document.getElementById("subheader");
 
-    // ✅ don't change text here — leave it as default "Financial Institution Home"
-
-    // Later, when user clicks on "cards" menu item:
+ 
     const sideBar = document.querySelector(".side-bar");
     if (sideBar) {
         sideBar.addEventListener("click", (e) => {

@@ -78,11 +78,12 @@ export const transactionDatabase = [
 
 export const dateBase = [
     {
-        company_name: "Mzansi Tech",
+        company_name: "Kodi codes",
         client_name: "Omphile",
         client_surname: "Mohlala",
         card_number: "4016000011163734",
         card_program: "CapBusDV",
+        currency: "Rands",
         card_sequence_number: "001",
         reporting_reference: "Restricted",
         card_status_word: "Active",
@@ -92,6 +93,7 @@ export const dateBase = [
         card_since_day: "06",
         expiry_date: "12/2028",
         expiry_day: "31",
+        account_product: "Capitec Business Account",
         account_type: "Check/Cheque",
         company_card: "<input type='checkbox' checked style='left: -200px; padding-top: 10px; position: absolute;'>",
         card_issued: "2024-06-06T01:45:08",
