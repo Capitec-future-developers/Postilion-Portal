@@ -354,9 +354,17 @@ input, .select{
 
 .subcateg{
     background-color: white;
-    position: absolute;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+}
+
+.more-subcateg{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
     width: 100%;
 }

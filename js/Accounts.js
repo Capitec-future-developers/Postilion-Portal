@@ -122,9 +122,9 @@ document.addEventListener("DOMContentLoaded", function () {
  </div>
 
  <!-- Other Tabs (initially hidden) -->
- <div id="tab-4-contents" class="tab-content" style="display: none;">
+ <div id="tab-4-contents" class="tab-content" style="display: none; border: 1px solid #cccc; ">
  <button id="edit">Edit</button>
- <div class="categ"><span>Category</span><select>
+ <div class="categ"><span>Category</span><select style="Position: absolute; right: 10px; width: 800px; height: 15px;">
  <oprion>< All ></oprion>
  <option>Undifined</option>
  <option>SARBNoForex</option>
@@ -137,15 +137,20 @@ document.addEventListener("DOMContentLoaded", function () {
  <th>Value</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<tb>Account_Home_Branch</tb>
-<tb>00240</tb>
-</tr>
-
-</tbody>
+<tbody id="undifined-table"></tbody>
 </table>
  </div>
+ <div class="more-subcateg"><'SarbNoForex'>
+ <table class="transactions-table">
+ <thead>
+ <tr>
+ <th>Field Name</th>
+ <th>Value</th>
+ </tr>
+ </thead>
+ <tbody id="more-subcateg-table"></tbody>
+ </table>
+</div>
  </div>
  
  <div id="tab-5-contents" class="tab-content" style="display: none;">
