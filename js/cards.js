@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
  <div class="card-inquiry-table-left">
  <div class="row"><span class="title-cell">Card Number:</span><span class="content-cell">${card.card_number}</span></div>
  <div class="row"><span class="title-cell">Card Sequence:</span><span class="content-cell">${card.card_sequence_number || 'N/A'}</span></div>
- <div class="row"><span class="title-cell">Company Card:</span><span class="content-cell">${card.company_card || 'N/A'}</span></div>
+ <div class="row"><span class="title-cell">Company Card:</span><span class="content-cell">${card.company_card || 'N/A' }</span></div>
  <div class="row"><span class="title-cell">Card Status:</span><span class="content-cell">${card.card_status_word ? `<img src="${statusImage}" alt="${card.card_status_word}" width="20"> ${card.card_status_word}` : 'N/A'}</span></div>
  <div class="row"><span class="title-cell">Card Since Date:</span><span class="content-cell">${card.card_since_date || 'N/A'}</span></div>
  <div class="row"><span class="title-cell">Card Since Day:</span><span class="content-cell">${card.card_since_day || 'N/A'}</span></div>

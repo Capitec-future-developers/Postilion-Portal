@@ -16,7 +16,7 @@
     border: 3px solid #8888;
     width: 82%;
     overflow: hidden;
-    height: 400px;
+    height: 430px;
     background-color: #fff;
 }
 
@@ -30,7 +30,7 @@
     border: 1px solid #888;
 }
 
-.right-details{
+.right-details, .rightdetails{
     position: absolute;
     top: 10px;
     right: -10px;
@@ -46,20 +46,20 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
-    border: 1px solid #888;
+    border: 1px solid #b1b0b0;
     overflow: hidden;
 }
 
 label{
     background-color: #f3f0f0;
     padding: 5px;
-    width: 100%;
+    width: 85%;
     height: 30px;
     border: 1px solid #888;
 }
 
 input, .select{
-    width: 80%;
+    width: 70%;
     height: 30px;
     border: 1px solid #beeaff;
     align-content: center;
@@ -378,4 +378,21 @@ input, .select{
     gap: 10px;
     margin-top: 10px;
     width: 100%;
+}
+
+.post_input_cal{
+
+    font-size: 11px;
+    font-weight: normal;
+    color: #000000;
+
+    width: 70%;
+    height: 20px;
+
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 0px;
+
+    border: 1px solid #b1cadb;
+    background-color: white;
 }

@@ -191,13 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
             enableEditMode(card);
         });
 
-        // Add event listener for the Active/Deactivate button
-        const activeDeactivateBtn = document.getElementById('active-deactivate');
-        activeDeactivateBtn.addEventListener('click', () => {
-            toggleCardStatus(card);
-        });
 
-        // Initialize tab functionality
         initTabs(card);
     }
 

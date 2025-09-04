@@ -95,7 +95,7 @@ export const dateBase = [
         expiry_day: "31",
         account_product: "Capitec Business Account",
         account_type: "Check/Cheque",
-        company_card: "<input type='checkbox' checked style='left: -200px; padding-top: 10px; position: absolute;'>",
+        company_card: "<input type='checkbox' checked style='left: 20px; padding-top: 10px; position: absolute;'>",
         card_issued: "2024-06-06T01:45:08",
         card_activated: "2024-06-13T11:42:08",
         branch_code: "BR001",

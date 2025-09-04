@@ -1,13 +1,13 @@
 .main-content{
     position: relative;
-    font-family: 'Roboto', sans-serif;
+    font-family: Tahoma;
 }
 
-.img{
+.imgs{
     position: absolute;
-    top: -10px;
+    top: 140px;
     left: -10px;
-    height: 150PX;
+    height: auto;
     width: 250px;
 }
 
@@ -16,15 +16,23 @@
     top: -10px;
     left: -10px;
     width: 250px;
-    height: 500px;
+    height: 150px;
 
+}
+
+.imgr{
+    position: absolute;
+    top: 185px;
+    left: -10px;
+    height: auto;
+    width: 250px;
 }
 
 .side-bar-content{
     position: absolute;
     top: 490px;
     left: -10px;
-    background-color: rgba(62, 62, 62, 0.47);
+    background-color: rgba(96, 95, 95, 0.47);
     height: 250px;
     width: 250px;
     display: flex;

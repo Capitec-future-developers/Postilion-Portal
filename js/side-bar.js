@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const subheader = document.getElementById('subheader');
 
     const sideBarContent = `
-        <div class="head" style="width: 50px;"><img src="./img/head.png" alt="head" class="img"></div>
+        <div class="head" style="width: 50px;"><img src="./img/LeftSide1.jpg" alt="head" class="img" ><img src="./img/LeftHeaderArea.jpg" alt="body" class="imgs"><img src="./img/navFade.jpg" class="imgr"></div>
         <div class="side-bar-content" id="subheader">
             <div class="side-bar-item" id="account-products">Account Products</div>
             <div class="side-bar-item" id="accounts">Accounts</div>
